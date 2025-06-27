@@ -1,4 +1,4 @@
-name: Compilar e Testar
+name: Build and Test
 
 on:
   push:
@@ -14,18 +14,18 @@ jobs:
       - name: Checkout do código
         uses: actions/checkout@v4
 
-      - name: Baixar SDK do .NET 8
+      - name: Setup .NET 8
         uses: actions/setup-dotnet@v4
         with:
           dotnet-version: "8.0.x"
 
       - name: Restaurar dependências
-        run: dotnet restore
+        run: dotnet restore MyMuscles.sln
 
       - name: Build
-        run: dotnet build --no-restore --configuration Release
+        run: dotnet build MyMuscles.sln --no-restore --configuration Release
 
-      - name: Verificar se pasta de testes existe
+      - name: Verificar se a pasta de testes existe
         id: testcheck
         run: |
           if [ -d "tests" ]; then
@@ -52,14 +52,15 @@ jobs:
             exit 1
           fi
 
-          coverage=$(dotnet tool install --global dotnet-reportgenerator-globaltool --version 5.1.26 && \
-            export PATH="$PATH:/home/runner/.dotnet/tools" && \
-            reportgenerator \
-              -reports:$report_path \
-              -targetdir:coveragereport \
-              -reporttypes:TextSummary && \
-            grep "Line coverage" coveragereport/Summary.txt | awk '{print $3}' | sed 's/%//')
+          dotnet tool install --global dotnet-reportgenerator-globaltool --version 5.1.26
+          export PATH="$PATH:/home/runner/.dotnet/tools"
 
+          reportgenerator \
+            -reports:$report_path \
+            -targetdir:coveragereport \
+            -reporttypes:TextSummary
+
+          coverage=$(grep "Line coverage" coveragereport/Summary.txt | awk '{print $3}' | sed 's/%//')
           echo "Cobertura: $coverage%"
 
           if (( $(echo "$coverage < 90" | bc -l) )); then
