@@ -5,6 +5,12 @@ namespace MyMuscles.Domain.ValueObjects;
 
 public sealed class Idade : ValueObjectBase
 {
+    public Idade(int valorEmAnos)
+    {
+        ValorEmAnos = valorEmAnos;
+        Validar();
+    }
+
     public int ValorEmAnos { get; private set; }
 
     protected override IEnumerable<object> GetEqualityComponents()
@@ -13,7 +19,7 @@ public sealed class Idade : ValueObjectBase
     }
 
     protected override void Validar()
-    {
+    {        
         if (ValorEmAnos < SistemaConstantes.IdadeMinima)
             AdicionarNotificacao(nameof(Idade), $"O campo '{nameof(Idade)}' precisa ser maior ou igual que '{SistemaConstantes.IdadeMaxima}' anos.");
 
