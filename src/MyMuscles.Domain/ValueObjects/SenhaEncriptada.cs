@@ -10,9 +10,4 @@ public sealed class SenhaEncriptada(string valor) : ValueObjectBase
     {
         yield return Valor;
     }
-
-    protected override void Validar()
-    {
-        throw new NotImplementedException();
-    }
 }

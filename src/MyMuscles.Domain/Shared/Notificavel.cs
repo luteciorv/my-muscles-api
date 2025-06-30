@@ -13,5 +13,8 @@ public abstract class Notificavel
     protected void AdicionarNotificacoes(List<Notificacao> notificacoes) =>
         _notificacoes.AddRange(notificacoes);
 
-    protected abstract void Validar();    
+    protected virtual void Validar()
+    {
+
+    }    
 }
