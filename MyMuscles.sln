@@ -7,6 +7,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{02EA681E-C7D
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyMuscles.Domain", "src\MyMuscles.Domain\MyMuscles.Domain.csproj", "{2D8ACB5D-AE0E-1F79-FEA0-EB1F7D4816C4}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{3768119E-2517-4E9B-B315-0191013D5D90}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyMuscles.Domain.UnitTesting", "tests\MyMuscles.Domain.UnitTesting\MyMuscles.Domain.UnitTesting.csproj", "{9B483D88-BD4C-480E-872A-C35E977FB9CD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -17,12 +21,17 @@ Global
 		{2D8ACB5D-AE0E-1F79-FEA0-EB1F7D4816C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2D8ACB5D-AE0E-1F79-FEA0-EB1F7D4816C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2D8ACB5D-AE0E-1F79-FEA0-EB1F7D4816C4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9B483D88-BD4C-480E-872A-C35E977FB9CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9B483D88-BD4C-480E-872A-C35E977FB9CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9B483D88-BD4C-480E-872A-C35E977FB9CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9B483D88-BD4C-480E-872A-C35E977FB9CD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{2D8ACB5D-AE0E-1F79-FEA0-EB1F7D4816C4} = {02EA681E-C7D8-13C7-8484-4AC65E1B71E8}
+		{9B483D88-BD4C-480E-872A-C35E977FB9CD} = {3768119E-2517-4E9B-B315-0191013D5D90}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {6F1CE802-1045-4B73-8B9E-475A72610F15}

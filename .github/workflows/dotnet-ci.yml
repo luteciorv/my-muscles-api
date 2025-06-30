@@ -34,34 +34,40 @@ jobs:
             echo "exists=false" >> $GITHUB_OUTPUT
           fi
 
-      - name: Rodar testes com cobertura (se existirem)
+      - name: Rodar testes com cobertura (todos os projetos encontrados)
         if: steps.testcheck.outputs.exists == 'true'
         run: |
-          dotnet test tests \
-            --no-build \
-            --configuration Release \
-            --collect:"XPlat Code Coverage" \
-            --results-directory ./TestResults
+          mkdir -p ./TestResults/Coverage
+          for proj in $(find tests -name "*.csproj"); do
+            name=$(basename "$proj" .csproj)
+            dotnet test "$proj" \
+              --no-build \
+              --configuration Release \
+              --collect:"XPlat Code Coverage" \
+              --results-directory ./TestResults/Coverage/$name
+          done
 
-      - name: Verificar cobertura de código (se testes rodaram)
+      - name: Verificar cobertura total
         if: steps.testcheck.outputs.exists == 'true'
         run: |
-          report_path=$(find ./TestResults -type f -name 'coverage.cobertura.xml' | head -n 1)
-          if [ -z "$report_path" ]; then
-            echo "Arquivo de cobertura não encontrado. Cancelando..."
-            exit 1
-          fi
-
           dotnet tool install --global dotnet-reportgenerator-globaltool --version 5.1.26
           export PATH="$PATH:/home/runner/.dotnet/tools"
 
+          # Combinar todos os relatórios encontrados
+          report_files=$(find ./TestResults/Coverage -name 'coverage.cobertura.xml' | paste -sd "," -)
+          if [ -z "$report_files" ]; then
+            echo "Nenhum arquivo de cobertura encontrado. Cancelando..."
+            exit 1
+          fi
+
           reportgenerator \
-            -reports:$report_path \
+            -reports:"$report_files" \
             -targetdir:coveragereport \
             -reporttypes:TextSummary
 
+          # Extrair valor da cobertura
           coverage=$(grep "Line coverage" coveragereport/Summary.txt | awk '{print $3}' | sed 's/%//')
-          echo "Cobertura: $coverage%"
+          echo "Cobertura combinada: $coverage%"
 
           if (( $(echo "$coverage < 90" | bc -l) )); then
             echo "Cobertura abaixo de 90%. Falhando o pipeline."
