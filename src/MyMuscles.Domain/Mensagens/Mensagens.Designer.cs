@@ -77,5 +77,50 @@ namespace MyMuscles.Domain.Mensagens {
                 return ResourceManager.GetString("CAMPO_OBRIGATORIO", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a O campo &apos;{0}&apos; precisa conter ao menos 1 caracter especial..
+        /// </summary>
+        public static string CARACTER_ESPECIAL_OBRIGATORIO {
+            get {
+                return ResourceManager.GetString("CARACTER_ESPECIAL_OBRIGATORIO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a O campo &apos;{0}&apos; precisa conter ao menos 1 letra maiúscula..
+        /// </summary>
+        public static string LETRA_MAIUSCULA_OBRIGATORIA {
+            get {
+                return ResourceManager.GetString("LETRA_MAIUSCULA_OBRIGATORIA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a O campo &apos;{0}&apos; precisa conter ao menos 1 letra minúscula..
+        /// </summary>
+        public static string LETRA_MINUSCULA_OBRIGATORIA {
+            get {
+                return ResourceManager.GetString("LETRA_MINUSCULA_OBRIGATORIA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a O campo &apos;{0}&apos; precisa conter ao menos &apos;{1}&apos; caracter (es)..
+        /// </summary>
+        public static string MINIMO_CARACTERES {
+            get {
+                return ResourceManager.GetString("MINIMO_CARACTERES", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a O campo &apos;{0}&apos; precisa conter ao menos 1 número..
+        /// </summary>
+        public static string NUMERO_OBRIGATORIO {
+            get {
+                return ResourceManager.GetString("NUMERO_OBRIGATORIO", resourceCulture);
+            }
+        }
     }
 }
