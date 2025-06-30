@@ -59,7 +59,7 @@ public sealed class NotificavelTest : Notificavel
         AdicionarNotificacao(notificacao.Chave, notificacao.Mensagem);
 
     public void Adicionar(List<Notificacao> notificacaos) =>
-        AdicionarNoificacoes(notificacaos);
+        AdicionarNotificacoes(notificacaos);
 
     protected override void Validar()
     {
