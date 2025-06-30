@@ -124,4 +124,19 @@
     <value>O campo '{0}' é obrigatório.</value>
     <comment>Use o "string.Format" para substituir o {0} pelo nome do campo.</comment>
   </data>
+  <data name="CARACTER_ESPECIAL_OBRIGATORIO" xml:space="preserve">
+    <value>O campo '{0}' precisa conter ao menos 1 caracter especial.</value>
+  </data>
+  <data name="LETRA_MAIUSCULA_OBRIGATORIA" xml:space="preserve">
+    <value>O campo '{0}' precisa conter ao menos 1 letra maiúscula.</value>
+  </data>
+  <data name="LETRA_MINUSCULA_OBRIGATORIA" xml:space="preserve">
+    <value>O campo '{0}' precisa conter ao menos 1 letra minúscula.</value>
+  </data>
+  <data name="MINIMO_CARACTERES" xml:space="preserve">
+    <value>O campo '{0}' precisa conter ao menos '{1}' caracter (es).</value>
+  </data>
+  <data name="NUMERO_OBRIGATORIO" xml:space="preserve">
+    <value>O campo '{0}' precisa conter ao menos 1 número.</value>
+  </data>
 </root>
