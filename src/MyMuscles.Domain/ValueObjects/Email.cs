@@ -1,4 +1,5 @@
-﻿using MyMuscles.Domain.Mensagens;
+﻿using MyMuscles.Domain.Extensions;
+using MyMuscles.Domain.Mensagens;
 using MyMuscles.Domain.Shared;
 using System.Net.Mail;
 
@@ -21,11 +22,15 @@ public sealed class Email : ValueObjectBase
 
     protected override void Validar()
     {
+        if(Endereco.Vazio())
+        {
+            AdicionarNotificacao(nameof(Email), MensagensExtension.CampoObrigatorio(nameof(Endereco)));
+            return;
+        }
+
         try
         {
-            var endereco = new MailAddress(Endereco);
-            if (endereco.Address != Endereco)
-                AdicionarNotificacao(nameof(Email), MensagensExtension.CampoObrigatorio(nameof(Endereco)));
+            _ = new MailAddress(Endereco);            
         }
         catch
         {

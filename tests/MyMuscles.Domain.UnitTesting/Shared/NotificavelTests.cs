@@ -23,7 +23,7 @@ public sealed class NotificavelTests
             n.First().Chave.ShouldBe(notificacao.Chave);
             n.First().Mensagem.ShouldBe(notificacao.Mensagem);
         });
-        notificavel.Valido().ShouldBeFalse();
+        notificavel.Valido.ShouldBeFalse();
     }
 
     [Fact]
@@ -42,7 +42,7 @@ public sealed class NotificavelTests
             n.ShouldContain(notificacao);
             n.ShouldContain(notificacao1);            
         });
-        notificavel.Valido().ShouldBeFalse();
+        notificavel.Valido.ShouldBeFalse();
     }
 
     private Notificacao GerarNotificacao()
