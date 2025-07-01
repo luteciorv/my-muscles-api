@@ -61,6 +61,15 @@ namespace MyMuscles.Domain.Mensagens {
         }
         
         /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a O campo {0} precisa ser um valor positivo..
+        /// </summary>
+        public static string CAMPO_APENAS_POSITIVO {
+            get {
+                return ResourceManager.GetString("CAMPO_APENAS_POSITIVO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Consulta uma cadeia de caracteres localizada semelhante a O campo &apos;{0}&apos; está inválido..
         /// </summary>
         public static string CAMPO_INVALIDO {
@@ -120,6 +129,15 @@ namespace MyMuscles.Domain.Mensagens {
         public static string NUMERO_OBRIGATORIO {
             get {
                 return ResourceManager.GetString("NUMERO_OBRIGATORIO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a O campo &apos;{0}&apos; não pode ultrapassar &apos;{1}&apos;..
+        /// </summary>
+        public static string VALOR_MAXIMO {
+            get {
+                return ResourceManager.GetString("VALOR_MAXIMO", resourceCulture);
             }
         }
     }
