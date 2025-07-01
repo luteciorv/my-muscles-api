@@ -7,12 +7,12 @@ namespace MyMuscles.Domain.ValueObjects;
 
 public sealed class IMC : ValueObjectBase
 {
-    public IMC(decimal pesoEmKg, Altura altura)
+    public IMC(Peso peso, Altura altura)
     {
-        Valor = CalcularImc(pesoEmKg, altura);
+        Valor = CalcularImc(peso.ValorEmKg, altura);
         Classificacao = Classificar(Valor);
 
-        Validar(pesoEmKg, altura);
+        Validar(peso, altura);
     }
 
     public decimal Valor { get; private set; }
@@ -23,17 +23,16 @@ public sealed class IMC : ValueObjectBase
         yield return Valor;
     }
 
-    private void Validar(decimal pesoEmKg, Altura altura)
+    private void Validar(Peso peso, Altura altura)
     {
-        if(pesoEmKg <= 0)
-            AdicionarNotificacao(nameof(pesoEmKg), MensagensExtension.ApenasValorPositivo(nameof(pesoEmKg)));
+        if (!peso.Valido)
+            AdicionarNotificacoes([.. peso.Notificacoes]);
 
         if (!altura.Valido)
             AdicionarNotificacoes([.. altura.Notificacoes]);
 
         if(Valor <= 0)
             AdicionarNotificacao(nameof(IMC), MensagensExtension.ApenasValorPositivo(nameof(IMC)));
-
     }
 
     private static decimal CalcularImc(decimal peso, Altura altura)
