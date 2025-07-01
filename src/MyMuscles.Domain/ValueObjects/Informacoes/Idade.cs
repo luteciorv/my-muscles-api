@@ -1,7 +1,7 @@
 ﻿using MyMuscles.Domain.Constantes;
 using MyMuscles.Domain.Shared;
 
-namespace MyMuscles.Domain.ValueObjects;
+namespace MyMuscles.Domain.ValueObjects.Informacoes;
 
 public sealed class Idade : ValueObjectBase
 {

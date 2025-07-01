@@ -3,6 +3,7 @@ using MyMuscles.Domain.Constantes;
 using MyMuscles.Domain.Enums;
 using MyMuscles.Domain.Mensagens;
 using MyMuscles.Domain.ValueObjects;
+using MyMuscles.Domain.ValueObjects.Informacoes;
 using Shouldly;
 
 namespace MyMuscles.Domain.UnitTesting.ValueObjects;
