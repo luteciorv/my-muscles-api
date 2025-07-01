@@ -22,4 +22,10 @@ public static class MensagensExtension
 
     public static string MinimoCaracteresObrigatorio(string nomeCampo, int quantidade) =>
         string.Format(Mensagens.MINIMO_CARACTERES, nomeCampo, quantidade);
+
+    public static string ApenasValorPositivo(string nomeCampo) =>
+        string.Format(Mensagens.CAMPO_APENAS_POSITIVO, nomeCampo);
+
+    public static string ValorMaximo(string nomeCampo, string valor) =>
+        string.Format(Mensagens.VALOR_MAXIMO, nomeCampo, valor);
 }
