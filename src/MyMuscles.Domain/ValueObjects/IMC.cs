@@ -2,6 +2,7 @@
 using MyMuscles.Domain.Enums;
 using MyMuscles.Domain.Mensagens;
 using MyMuscles.Domain.Shared;
+using MyMuscles.Domain.ValueObjects.Informacoes;
 
 namespace MyMuscles.Domain.ValueObjects;
 

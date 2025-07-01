@@ -1,10 +1,10 @@
 ﻿using Bogus;
 using MyMuscles.Domain.Constantes;
 using MyMuscles.Domain.Mensagens;
-using MyMuscles.Domain.ValueObjects;
+using MyMuscles.Domain.ValueObjects.Informacoes;
 using Shouldly;
 
-namespace MyMuscles.Domain.UnitTesting.ValueObjects;
+namespace MyMuscles.Domain.UnitTesting.ValueObjects.Informacoes;
 
 public sealed class AlturaTests
 {

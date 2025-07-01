@@ -3,7 +3,7 @@ using MyMuscles.Domain.Mensagens;
 using MyMuscles.Domain.Shared;
 using System.Net.Mail;
 
-namespace MyMuscles.Domain.ValueObjects;
+namespace MyMuscles.Domain.ValueObjects.Informacoes;
 
 public sealed class Email : ValueObjectBase
 {

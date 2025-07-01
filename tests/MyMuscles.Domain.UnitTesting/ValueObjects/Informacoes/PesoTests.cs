@@ -1,9 +1,9 @@
 ﻿using Bogus;
 using MyMuscles.Domain.Mensagens;
-using MyMuscles.Domain.ValueObjects;
+using MyMuscles.Domain.ValueObjects.Informacoes;
 using Shouldly;
 
-namespace MyMuscles.Domain.UnitTesting.ValueObjects;
+namespace MyMuscles.Domain.UnitTesting.ValueObjects.Informacoes;
 
 public sealed class PesoTests
 {
@@ -34,7 +34,7 @@ public sealed class PesoTests
     [Fact]
     public void Dado_dois_pesos_com_valores_iguais_devem_ser_iguais()
     {
-        decimal pesoEmKg = (_faker.Random.Decimal(min: 0.1m, 1000));
+        decimal pesoEmKg = _faker.Random.Decimal(min: 0.1m, 1000);
         var peso = new Peso(pesoEmKg);
         var peso1 = new Peso(pesoEmKg);
 
