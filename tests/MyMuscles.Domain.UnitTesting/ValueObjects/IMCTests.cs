@@ -15,7 +15,8 @@ public sealed class IMCTests
     public void Dado_imc_valido_nao_deve_conter_notificacao()
     {
         var altura = new Altura(_faker.Random.Decimal(0.1m, SistemaConstantes.AlturaMaxima));
-        var imc = new IMC(pesoEmKg: _faker.Random.Decimal(0.1m, 100), altura);
+        var peso = new Peso(_faker.Random.Decimal(0.1m, 100));
+        var imc = new IMC(peso, altura);
 
         imc.Valido.ShouldBeTrue();
         imc.Notificacoes.ShouldBeEmpty();
@@ -25,13 +26,15 @@ public sealed class IMCTests
     public void Dado_imc_com_peso_invalido_deve_conter_notificacao()
     {
         var altura = new Altura(_faker.Random.Decimal(0.1m, SistemaConstantes.AlturaMaxima));
-        var imc = new IMC(pesoEmKg: _faker.Random.Decimal(-100, 0), altura);
+        var peso = new Peso(_faker.Random.Decimal(-100, 0));
+
+        var imc = new IMC(peso, altura);
 
         imc.Valido.ShouldBeFalse();
         imc.Notificacoes.ShouldSatisfyAllConditions(n =>
         {
-            n.ShouldContain(n => n.Chave == "pesoEmKg");
-            n.ShouldContain(n => n.Mensagem == MensagensExtension.ApenasValorPositivo("pesoEmKg"));
+            n.ShouldContain(n => n.Chave == nameof(Peso));
+            n.ShouldContain(n => n.Mensagem == MensagensExtension.ApenasValorPositivo(nameof(Peso)));
         });
     }
 
@@ -39,7 +42,9 @@ public sealed class IMCTests
     public void Dado_imc_com_altura_invalida_deve_conter_notificacao()
     {
         var altura = new Altura(_faker.Random.Decimal(-100, 0));
-        var imc = new IMC(pesoEmKg: _faker.Random.Decimal(0.1m, 100), altura);
+        var peso = new Peso(_faker.Random.Decimal(0.1m, 100));
+
+        var imc = new IMC(peso, altura);
 
         imc.Valido.ShouldBeFalse();
         imc.Notificacoes.ShouldSatisfyAllConditions(n =>
@@ -50,8 +55,8 @@ public sealed class IMCTests
     }
 
     [InlineData(EClassificacaoIMC.AbaixoDoPeso, 50, 1.70)]
-    [InlineData(EClassificacaoIMC.PesoNormal, 65, 1.70)]   
-    [InlineData(EClassificacaoIMC.Sobrepeso, 78, 1.70)]     
+    [InlineData(EClassificacaoIMC.PesoNormal, 65, 1.70)]
+    [InlineData(EClassificacaoIMC.Sobrepeso, 78, 1.70)]
     [InlineData(EClassificacaoIMC.ObesidadeGrau1, 90, 1.70)]
     [InlineData(EClassificacaoIMC.ObesidadeGrau2, 105, 1.70)]
     [InlineData(EClassificacaoIMC.ObesidadeGrau3, 120, 1.70)]
@@ -59,7 +64,8 @@ public sealed class IMCTests
     public void Dado_imc_valido_deve_corresponder_a_classificacao(EClassificacaoIMC classificacao, decimal pesoEmKg, decimal alturaEmMetros)
     {
         var altura = new Altura(alturaEmMetros);
-        var imc = new IMC(pesoEmKg, altura);
+        var peso = new Peso(pesoEmKg);
+        var imc = new IMC(peso, altura);
 
         imc.Classificacao.ShouldBe(classificacao);
     }
@@ -68,24 +74,25 @@ public sealed class IMCTests
     public void Dado_dois_imc_com_valores_iguais_devem_ser_iguais()
     {
         decimal pesoEmKg = _faker.Random.Decimal(0.1m, 100);
+        var peso = new Peso(pesoEmKg);
         decimal alturaEmMetros = _faker.Random.Decimal(0.1m, SistemaConstantes.AlturaMaxima);
         var altura = new Altura(alturaEmMetros);
 
-        var imc = new IMC(pesoEmKg, altura);
-        var imc1 = new IMC(pesoEmKg, altura);
+        var imc = new IMC(peso, altura);
+        var imc1 = new IMC(peso, altura);
 
         (imc == imc1).ShouldBeTrue();
     }
-    
+
     [Fact]
     public void Dado_dois_imc_com_valores_diferenes_devem_ser_diferentes()
-    {        
-        var imc = new IMC(pesoEmKg: _faker.Random.Decimal(0.1m, 100), 
+    {
+        var imc = new IMC(peso: new Peso(_faker.Random.Decimal(0.1m, 100)),
                           altura: new Altura(_faker.Random.Decimal(0.1m, SistemaConstantes.AlturaMaxima))
         );
-        var imc1 = new IMC(pesoEmKg: _faker.Random.Decimal(0.1m, 100),
+        var imc1 = new IMC(peso: new Peso(_faker.Random.Decimal(0.1m, 100)),
                          altura: new Altura(_faker.Random.Decimal(0.1m, SistemaConstantes.AlturaMaxima))
-       );
+        );
 
         (imc != imc1).ShouldBeTrue();
     }
