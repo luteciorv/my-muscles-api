@@ -6,6 +6,12 @@ namespace MyMuscles.Domain.ValueObjects;
 
 public sealed class Altura : ValueObjectBase
 {
+    public Altura(decimal valorEmMetros)
+    {
+        ValorEmMetros = valorEmMetros;
+        Validar();
+    }
+
     public decimal ValorEmMetros { get; private set; }
 
     protected override IEnumerable<object> GetEqualityComponents()
@@ -16,7 +22,7 @@ public sealed class Altura : ValueObjectBase
     protected override void Validar()
     {
         if(ValorEmMetros <= 0)
-            AdicionarNotificacao(nameof(Altura), MensagensExtension.ApenasValorPositivo(nameof(Altura));
+            AdicionarNotificacao(nameof(Altura), MensagensExtension.ApenasValorPositivo(nameof(Altura)));
 
         if(ValorEmMetros > SistemaConstantes.AlturaMaxima)
             AdicionarNotificacao(nameof(Altura), MensagensExtension.ValorMaximo(nameof(Altura), $"{SistemaConstantes.AlturaMaxima} m"));
