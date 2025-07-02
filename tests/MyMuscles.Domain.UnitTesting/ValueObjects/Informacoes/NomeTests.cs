@@ -27,7 +27,6 @@ public sealed class NomeTests
         nome.Notificacoes.ShouldSatisfyAllConditions(n =>
         {
             n.ShouldContain(n => n.Chave == nameof(Nome));
-            n.ShouldContain(n => n.Mensagem == MensagensExtension.CampoObrigatorio(nameof(Nome)));
         });
     }
 

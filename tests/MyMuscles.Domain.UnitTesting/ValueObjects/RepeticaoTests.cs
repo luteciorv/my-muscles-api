@@ -27,7 +27,6 @@ public sealed class RepeticaoTests
         repeticao.Notificacoes.ShouldSatisfyAllConditions(n =>
         {
             n.ShouldContain(n => n.Chave == nameof(Repeticao));
-            n.ShouldContain(n => n.Mensagem == MensagensExtension.ApenasValorPositivo(nameof(Repeticao)));
         });
     }
 

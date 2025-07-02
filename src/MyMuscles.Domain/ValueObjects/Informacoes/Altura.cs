@@ -1,5 +1,4 @@
 ﻿using MyMuscles.Domain.Constantes;
-using MyMuscles.Domain.Extensions;
 using MyMuscles.Domain.Shared;
 
 namespace MyMuscles.Domain.ValueObjects.Informacoes;
@@ -22,9 +21,9 @@ public sealed class Altura : ValueObjectBase
     protected override void Validar()
     {
         if(ValorEmMetros <= 0)
-            AdicionarNotificacao(nameof(Altura), MensagensExtension.ApenasValorPositivo(nameof(Altura)));
+            AdicionarNotificacao(nameof(Altura), "O campo 'Altura' não pode assumir valores não positivos.");
 
         if(ValorEmMetros > SistemaConstantes.AlturaMaxima)
-            AdicionarNotificacao(nameof(Altura), MensagensExtension.ValorMaximo(nameof(Altura), $"{SistemaConstantes.AlturaMaxima} m"));
+            AdicionarNotificacao(nameof(Altura), $"O campo 'Altura' pode ter no máximo '{SistemaConstantes.AlturaMaxima}' m.");
     }
 }

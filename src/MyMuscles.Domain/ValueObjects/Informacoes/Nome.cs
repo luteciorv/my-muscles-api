@@ -24,6 +24,6 @@ public sealed class Nome : ValueObjectBase
     protected override void Validar()
     {
         if (Primeiro.Vazio())
-            AdicionarNotificacao(nameof(Nome), MensagensExtension.CampoObrigatorio(nameof(Nome)));
+            AdicionarNotificacao(nameof(Nome), "O campo 'Nome' é obrigatório.");
     }
 }

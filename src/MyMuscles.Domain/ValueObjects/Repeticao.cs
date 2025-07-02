@@ -1,5 +1,4 @@
-﻿using MyMuscles.Domain.Extensions;
-using MyMuscles.Domain.Shared;
+﻿using MyMuscles.Domain.Shared;
 
 namespace MyMuscles.Domain.ValueObjects;
 
@@ -21,6 +20,6 @@ public sealed class Repeticao : ValueObjectBase
     protected override void Validar()
     {
         if(Quantidade <= 0)
-            AdicionarNotificacao(nameof(Repeticao), MensagensExtension.ApenasValorPositivo(nameof(Repeticao)));
+            AdicionarNotificacao(nameof(Repeticao), "O campo precisa ter o valor maior do que 0.");
     }
 }

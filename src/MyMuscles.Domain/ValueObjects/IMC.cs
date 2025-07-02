@@ -33,7 +33,7 @@ public sealed class IMC : ValueObjectBase
             AdicionarNotificacoes([.. altura.Notificacoes]);
 
         if(Valor <= 0)
-            AdicionarNotificacao(nameof(IMC), MensagensExtension.ApenasValorPositivo(nameof(IMC)));
+            AdicionarNotificacao(nameof(IMC), "O campo precisa ter o valor maior do que 0.");
     }
 
     private static decimal CalcularImc(decimal peso, Altura altura)

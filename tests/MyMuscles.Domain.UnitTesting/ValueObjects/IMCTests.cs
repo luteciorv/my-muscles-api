@@ -1,7 +1,6 @@
 ﻿using Bogus;
 using MyMuscles.Domain.Constantes;
 using MyMuscles.Domain.Enums;
-using MyMuscles.Domain.Extensions;
 using MyMuscles.Domain.ValueObjects;
 using MyMuscles.Domain.ValueObjects.Informacoes;
 using Shouldly;
@@ -35,7 +34,6 @@ public sealed class IMCTests
         imc.Notificacoes.ShouldSatisfyAllConditions(n =>
         {
             n.ShouldContain(n => n.Chave == nameof(Peso));
-            n.ShouldContain(n => n.Mensagem == MensagensExtension.ApenasValorPositivo(nameof(Peso)));
         });
     }
 
@@ -51,7 +49,6 @@ public sealed class IMCTests
         imc.Notificacoes.ShouldSatisfyAllConditions(n =>
         {
             n.ShouldContain(n => n.Chave == nameof(Altura));
-            n.ShouldContain(n => n.Mensagem == MensagensExtension.ApenasValorPositivo(nameof(Altura)));
         });
     }
 

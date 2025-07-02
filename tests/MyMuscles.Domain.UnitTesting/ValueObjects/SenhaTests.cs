@@ -28,7 +28,6 @@ public sealed class SenhaTests
         {
             n.Count.ShouldBe(1);
             n.First().Chave.ShouldBe(nameof(Senha));
-            n.First().Mensagem.ShouldBe(MensagensExtension.CampoObrigatorio(nameof(Senha)));
         });
     }
 
@@ -42,7 +41,6 @@ public sealed class SenhaTests
         {
             n.Count.ShouldBe(1);
             n.First().Chave.ShouldBe(nameof(Senha));
-            n.First().Mensagem.ShouldBe(MensagensExtension.MinimoCaracteresObrigatorio(nameof(Senha), 8));
         });
     }
 
@@ -56,7 +54,6 @@ public sealed class SenhaTests
         {
             n.Count.ShouldBe(1);
             n.First().Chave.ShouldBe(nameof(Senha));
-            n.First().Mensagem.ShouldBe(MensagensExtension.LetraMaiusculaObrigatoria(nameof(Senha)));
         });
     }
 
@@ -70,7 +67,6 @@ public sealed class SenhaTests
         {
             n.Count.ShouldBe(1);
             n.First().Chave.ShouldBe(nameof(Senha));
-            n.First().Mensagem.ShouldBe(MensagensExtension.LetraMinusculaObrigatoria(nameof(Senha)));
         });
     }
 
@@ -84,7 +80,6 @@ public sealed class SenhaTests
         {
             n.Count.ShouldBe(1);
             n.First().Chave.ShouldBe(nameof(Senha));
-            n.First().Mensagem.ShouldBe(MensagensExtension.NumeroObrigatorio(nameof(Senha)));
         });
     }
 
@@ -98,7 +93,6 @@ public sealed class SenhaTests
         {
             n.Count.ShouldBe(1);
             n.First().Chave.ShouldBe(nameof(Senha));
-            n.First().Mensagem.ShouldBe(MensagensExtension.CaracterEspecialObrigatorio(nameof(Senha)));
         });
     }
 

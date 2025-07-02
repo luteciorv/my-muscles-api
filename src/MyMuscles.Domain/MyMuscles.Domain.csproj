@@ -7,7 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Update="Mensagens\Mensagens.Designer.cs">
+    <Compile Update="MensagensSistema\Mensagens.Designer.cs">
       <DesignTime>True</DesignTime>
       <AutoGen>True</AutoGen>
       <DependentUpon>Mensagens.resx</DependentUpon>
@@ -15,7 +15,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <EmbeddedResource Update="Mensagens\Mensagens.resx">
+    <EmbeddedResource Update="MensagensSistema\Mensagens.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <LastGenOutput>Mensagens.Designer.cs</LastGenOutput>
     </EmbeddedResource>

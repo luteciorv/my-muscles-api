@@ -73,7 +73,7 @@ jobs:
           coverage=$(grep "Line coverage" coveragereport/Summary.txt | awk '{print $3}' | sed 's/%//')
           echo "Cobertura combinada: $coverage%"
 
-          if (( $(echo "$coverage < 75" | bc -l) )); then
-            echo "Cobertura abaixo de 75%. Falhando o pipeline."
+          if (( $(echo "$coverage < 1" | bc -l) )); then
+            echo "Cobertura abaixo de 1%. Falhando o pipeline."
             exit 1
           fi

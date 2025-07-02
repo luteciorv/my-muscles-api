@@ -4,17 +4,15 @@ using MyMuscles.Domain.Shared;
 using MyMuscles.Domain.ValueObjects;
 using MyMuscles.Domain.ValueObjects.Dados;
 using MyMuscles.Domain.ValueObjects.Informacoes;
-using System.Diagnostics.CodeAnalysis;
 
 namespace MyMuscles.Domain.Entidades;
 
-[ExcludeFromCodeCoverage]
 public sealed class Treino : EntidadeBase
 {
-    public Treino(EDiaDaSemana diaDaSemana, List<Exercicio> exercicios)
+    public Treino(EDiaDaSemana diaDaSemana)
     {
         DiaDaSemana = diaDaSemana;
-        _exercicios = exercicios;
+        _exercicios = [];
         Concluido = false;
         Validar();
     }
@@ -28,7 +26,7 @@ public sealed class Treino : EntidadeBase
     protected override void Validar()
     {
         if (!Enum.IsDefined(typeof(EDiaDaSemana), DiaDaSemana))
-            AdicionarNotificacao(nameof(EDiaDaSemana), MensagensExtension.CampoInvalido(nameof(DiaDaSemana)));
+            AdicionarNotificacao("Dia da semana", "O campo 'dia da semana' está inválido. Informe um valor entre segunda-feira a domingo.");
 
         if (Concluido)
             AdicionarNotificacao(nameof(Concluido), "O treino precisa ser criado como não concluído.");
@@ -38,7 +36,7 @@ public sealed class Treino : EntidadeBase
     {
         if (!Enum.IsDefined(typeof(EDiaDaSemana), novoDiaDaSemana))
         {
-            AdicionarNotificacao(nameof(EDiaDaSemana), MensagensExtension.CampoInvalido(nameof(DiaDaSemana)));
+            AdicionarNotificacao("Dia da semana", "O campo 'dia da semana' está inválido. Informe um valor entre segunda-feira a domingo.");
             return;
         }
 
@@ -51,6 +49,12 @@ public sealed class Treino : EntidadeBase
         if (Concluido)
         {
             AdicionarNotificacao(nameof(Concluido), "O treino já foi concluído.");
+            return;
+        }
+
+        if(Exercicios.Vazio())
+        {
+            AdicionarNotificacao(nameof(Treino), "Nenhum exercício adicionado no treino.");
             return;
         }
 
@@ -95,7 +99,7 @@ public sealed class Treino : EntidadeBase
         var exercicio = _exercicios.FirstOrDefault(e => e.Id == id);
         if (exercicio is null)
         {
-            AdicionarNotificacao(nameof(Exercicio), Mensagens.EXERCICIO_NAO_ENCONTRADO);
+            AdicionarNotificacao("Exercício", $"O exercício de id '{id}' não foi encontrado.");
             return;
         }
 
@@ -114,17 +118,11 @@ public sealed class Treino : EntidadeBase
         var exercicio = _exercicios.FirstOrDefault(e => e.Id == id);
         if (exercicio is null)
         {
-            AdicionarNotificacao(nameof(Exercicio), Mensagens.EXERCICIO_NAO_ENCONTRADO);
+            AdicionarNotificacao("Exercício", $"O exercício de id '{id}' não foi encontrado.");
             return;
         }
 
-        exercicio.AtualizarDescricao(novaDescricao);
-        if (!exercicio.Valido)
-        {
-            AdicionarNotificacoes([.. exercicio.Notificacoes]);
-            return;
-        }
-
+        exercicio.AtualizarDescricao(novaDescricao);       
         AtualizadoEm = DateTime.UtcNow;
     }
 
@@ -133,7 +131,7 @@ public sealed class Treino : EntidadeBase
         var exercicio = _exercicios.FirstOrDefault(e => e.Id == id);
         if (exercicio is null)
         {
-            AdicionarNotificacao(nameof(Exercicio), Mensagens.EXERCICIO_NAO_ENCONTRADO);
+            AdicionarNotificacao("Exercício", $"O exercício de id '{id}' não foi encontrado.");
             return;
         }
 
@@ -152,7 +150,7 @@ public sealed class Treino : EntidadeBase
         var exercicio = _exercicios.FirstOrDefault(e => e.Id == id);
         if (exercicio is null)
         {
-            AdicionarNotificacao(nameof(Exercicio), Mensagens.EXERCICIO_NAO_ENCONTRADO);
+            AdicionarNotificacao("Exercício", $"O exercício de id '{id}' não foi encontrado.");
             return;
         }
 
@@ -171,7 +169,7 @@ public sealed class Treino : EntidadeBase
         var exercicio = _exercicios.FirstOrDefault(e => e.Id == id);
         if (exercicio is null)
         {
-            AdicionarNotificacao(nameof(Exercicio), Mensagens.EXERCICIO_NAO_ENCONTRADO);
+            AdicionarNotificacao("Exercício", $"O exercício de id '{id}' não foi encontrado.");
             return;
         }
 

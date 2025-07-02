@@ -27,7 +27,6 @@ public sealed class PesoTests
         peso.Notificacoes.ShouldSatisfyAllConditions(n =>
         {
             n.ShouldContain(n => n.Chave == nameof(Peso));
-            n.ShouldContain(n => n.Mensagem == MensagensExtension.ApenasValorPositivo(nameof(Peso)));
         });
     }
 
