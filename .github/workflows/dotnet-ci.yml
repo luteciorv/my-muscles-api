@@ -54,18 +54,15 @@ jobs:
           export PATH="$PATH:/home/runner/.dotnet/tools"
 
           # Coletar todos os arquivos de cobertura
-          report_args=""
-          for file in $(find ./TestResults/Coverage -name 'coverage.cobertura.xml'); do
-            report_args="$report_args -reports:$file"
-          done
+          report_files=$(find ./TestResults/Coverage -name 'coverage.cobertura.xml' | paste -sd "," -)
 
-          if [ -z "$report_args" ]; then
+          if [ -z "$report_files" ]; then
             echo "Nenhum arquivo de cobertura encontrado. Cancelando..."
             exit 1
           fi
 
           reportgenerator \
-            $report_args \
+            -reports:"$report_files" \
             -targetdir:coveragereport \
             -reporttypes:TextSummary
 
