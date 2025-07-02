@@ -47,25 +47,29 @@ jobs:
               --results-directory ./TestResults/Coverage/$name
           done
 
-      - name: Verificar cobertura total
+       - name: Verificar cobertura total
         if: steps.testcheck.outputs.exists == 'true'
         run: |
           dotnet tool install --global dotnet-reportgenerator-globaltool --version 5.1.26
           export PATH="$PATH:/home/runner/.dotnet/tools"
 
-          # Combinar todos os relatórios encontrados
-          report_files=$(find ./TestResults/Coverage -name 'coverage.cobertura.xml' | paste -sd "," -)
-          if [ -z "$report_files" ]; then
+          # Coletar todos os arquivos de cobertura
+          report_args=""
+          for file in $(find ./TestResults/Coverage -name 'coverage.cobertura.xml'); do
+            report_args="$report_args -reports:$file"
+          done
+
+          if [ -z "$report_args" ]; then
             echo "Nenhum arquivo de cobertura encontrado. Cancelando..."
             exit 1
           fi
 
           reportgenerator \
-            -reports:"$report_files" \
+            $report_args \
             -targetdir:coveragereport \
             -reporttypes:TextSummary
 
-          # Extrair valor da cobertura
+          # Extrair cobertura final
           coverage=$(grep "Line coverage" coveragereport/Summary.txt | awk '{print $3}' | sed 's/%//')
           echo "Cobertura combinada: $coverage%"
 
