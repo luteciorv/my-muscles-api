@@ -24,7 +24,28 @@ public sealed class Exercicio : EntidadeBase
     public bool Concluido { get; private set; }
 
     public IReadOnlyCollection<Foto> Fotos => _fotos;
-    private readonly List<Foto> _fotos;
+    private List<Foto> _fotos;
+
+    protected override void Validar()
+    {
+        if (!Nome.Valido)
+            AdicionarNotificacoes([.. Nome.Notificacoes]);
+
+        if (!Series.Valido)
+            AdicionarNotificacoes([.. Series.Notificacoes]);
+
+        if (Concluido)
+            AdicionarNotificacao(nameof(Exercicio), "O exercício deve iniciar como não concluído.");
+
+        if (!Repeticao.Valido)
+            AdicionarNotificacoes([.. Repeticao.Notificacoes]);
+
+        if (Fotos.Any(f => !f.Valido))
+        {
+            List<Notificacao> erros = [.. Fotos.Where(f => !f.Valido).SelectMany(f => f.Notificacoes)];
+            AdicionarNotificacoes(erros);
+        }
+    }
 
     public void Concluir()
     {
@@ -38,21 +59,58 @@ public sealed class Exercicio : EntidadeBase
         Concluido = true;
     }
 
-    protected override void Validar()
+    public void AtualizarNome(Nome novoNome)
     {
-        if (!Nome.Valido)
-            AdicionarNotificacoes([.. Nome.Notificacoes]);
-
-        if (!Series.Valido)
-            AdicionarNotificacoes([.. Series.Notificacoes]);
-
-        if (!Repeticao.Valido)
-            AdicionarNotificacoes([.. Repeticao.Notificacoes]);
-
-        if (Fotos.Any(f => !f.Valido))
+        if (!novoNome.Valido)
         {
-            List<Notificacao> erros = [.. Fotos.Where(f => !f.Valido).SelectMany(f => f.Notificacoes)];
-            AdicionarNotificacoes(erros);
+            AdicionarNotificacoes([.. novoNome.Notificacoes]);
+            return;
         }
+
+        AtualizadoEm = DateTime.UtcNow;
+        Nome = novoNome;
+    }
+
+    public void AtualizarDescricao(Descricao novaDescricao)
+    {
+        AtualizadoEm = DateTime.UtcNow;
+        Descricao = novaDescricao;
+    }
+
+    public void AtualizarSeries(Repeticao novaSerie)
+    {
+        if (!novaSerie.Valido)
+        {
+            AdicionarNotificacoes([.. novaSerie.Notificacoes]);
+            return;
+        }
+
+        AtualizadoEm = DateTime.UtcNow;
+        Series = novaSerie;
+    }
+
+    public void AtualizarRepeticoes(Repeticao novaRepeticao)
+    {
+        if (!novaRepeticao.Valido)
+        {
+            AdicionarNotificacoes([.. novaRepeticao.Notificacoes]);
+            return;
+        }
+
+        AtualizadoEm = DateTime.UtcNow;
+        Repeticao = novaRepeticao;
+    }
+
+    public void AtualizarFotos(List<Foto> novasFotos)
+    {
+        if (novasFotos.Any(f => !f.Valido))
+        {
+            List<Notificacao> erros = [.. novasFotos.Where(f => !f.Valido).SelectMany(f => f.Notificacoes)];
+            AdicionarNotificacoes(erros);
+            return;
+        }
+
+        AtualizadoEm = DateTime.UtcNow;
+        _fotos = novasFotos;
     }
 }
