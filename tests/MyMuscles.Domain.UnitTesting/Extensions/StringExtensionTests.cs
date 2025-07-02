@@ -4,7 +4,7 @@ using Shouldly;
 
 namespace MyMuscles.Domain.UnitTesting.Extensions;
 
-public sealed class StringExtension
+public sealed class StringExtensionTests
 {
     private readonly Faker _faker = new("pt_BR");
 
