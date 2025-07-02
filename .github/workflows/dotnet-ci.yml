@@ -53,7 +53,6 @@ jobs:
           dotnet tool install --global dotnet-reportgenerator-globaltool --version 5.1.26
           export PATH="$PATH:/home/runner/.dotnet/tools"
 
-          # Coletar todos os arquivos de cobertura
           report_files=$(find ./TestResults/Coverage -name 'coverage.cobertura.xml' | paste -sd "," -)
 
           if [ -z "$report_files" ]; then
@@ -66,7 +65,6 @@ jobs:
             -targetdir:coveragereport \
             -reporttypes:TextSummary
 
-          # Extrair cobertura final
           coverage=$(grep "Line coverage" coveragereport/Summary.txt | awk '{print $3}' | sed 's/%//')
           echo "Cobertura combinada: $coverage%"
 
