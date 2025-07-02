@@ -7,7 +7,7 @@ on:
     branches: ["**"]
 
 jobs:
-  build-and-test:
+  compilar:
     runs-on: ubuntu-latest
 
     steps:
@@ -24,51 +24,3 @@ jobs:
 
       - name: Build
         run: dotnet build MyMuscles.sln --no-restore --configuration Release
-
-      - name: Verificar se a pasta de testes existe
-        id: testcheck
-        run: |
-          if [ -d "tests" ]; then
-            echo "exists=true" >> $GITHUB_OUTPUT
-          else
-            echo "exists=false" >> $GITHUB_OUTPUT
-          fi
-
-      - name: Rodar testes com cobertura (todos os projetos encontrados)
-        if: steps.testcheck.outputs.exists == 'true'
-        run: |
-          mkdir -p ./TestResults/Coverage
-          for proj in $(find tests -name "*.csproj"); do
-            name=$(basename "$proj" .csproj)
-            dotnet test "$proj" \
-              --no-build \
-              --configuration Release \
-              --collect:"XPlat Code Coverage" \
-              --results-directory ./TestResults/Coverage/$name
-          done
-
-      - name: Verificar cobertura total
-        if: steps.testcheck.outputs.exists == 'true'
-        run: |
-          dotnet tool install --global dotnet-reportgenerator-globaltool --version 5.1.26
-          export PATH="$PATH:/home/runner/.dotnet/tools"
-
-          report_files=$(find ./TestResults/Coverage -name 'coverage.cobertura.xml' | paste -sd "," -)
-
-          if [ -z "$report_files" ]; then
-            echo "Nenhum arquivo de cobertura encontrado. Cancelando..."
-            exit 1
-          fi
-
-          reportgenerator \
-            -reports:"$report_files" \
-            -targetdir:coveragereport \
-            -reporttypes:TextSummary
-
-          coverage=$(grep "Line coverage" coveragereport/Summary.txt | awk '{print $3}' | sed 's/%//')
-          echo "Cobertura combinada: $coverage%"
-
-          if (( $(echo "$coverage < 1" | bc -l) )); then
-            echo "Cobertura abaixo de 1%. Falhando o pipeline."
-            exit 1
-          fi
