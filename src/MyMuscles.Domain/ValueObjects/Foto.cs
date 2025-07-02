@@ -1,5 +1,4 @@
 ﻿using MyMuscles.Domain.Extensions;
-using MyMuscles.Domain.Mensagens;
 using MyMuscles.Domain.Shared;
 
 namespace MyMuscles.Domain.ValueObjects;
@@ -26,12 +25,12 @@ public sealed class Foto : ValueObjectBase
     protected override void Validar()
     {
         if (Nome.Vazio())
-            AdicionarNotificacao(nameof(Nome), MensagensExtension.CampoObrigatorio(nameof(Nome)));
+            AdicionarNotificacao(nameof(Nome), "O campo 'Nome' é obrigatório.");
 
         if(Url.Vazio())
-            AdicionarNotificacao(nameof(Url), MensagensExtension.CampoObrigatorio(nameof(Url)));
+            AdicionarNotificacao(nameof(Url), "O campo 'Url' é obrigatório.");
 
         if (!Uri.TryCreate(Url, UriKind.Absolute, out var uriResult) || (uriResult.Scheme != Uri.UriSchemeHttp && uriResult.Scheme != Uri.UriSchemeHttps))
-            AdicionarNotificacao(nameof(Url), MensagensExtension.CampoInvalido(nameof(Url)));
+            AdicionarNotificacao(nameof(Url), "O campo 'Url' está inválido.");
     }
 }

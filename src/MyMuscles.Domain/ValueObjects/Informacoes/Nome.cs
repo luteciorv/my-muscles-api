@@ -1,5 +1,4 @@
 ﻿using MyMuscles.Domain.Extensions;
-using MyMuscles.Domain.Mensagens;
 using MyMuscles.Domain.Shared;
 
 namespace MyMuscles.Domain.ValueObjects.Informacoes;
@@ -25,6 +24,6 @@ public sealed class Nome : ValueObjectBase
     protected override void Validar()
     {
         if (Primeiro.Vazio())
-            AdicionarNotificacao(nameof(Nome), MensagensExtension.CampoObrigatorio(nameof(Nome)));
+            AdicionarNotificacao(nameof(Nome), "O campo 'Nome' é obrigatório.");
     }
 }

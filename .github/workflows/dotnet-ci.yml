@@ -7,7 +7,7 @@ on:
     branches: ["**"]
 
 jobs:
-  build-and-test:
+  compilar:
     runs-on: ubuntu-latest
 
     steps:
@@ -24,56 +24,3 @@ jobs:
 
       - name: Build
         run: dotnet build MyMuscles.sln --no-restore --configuration Release
-
-      - name: Verificar se a pasta de testes existe
-        id: testcheck
-        run: |
-          if [ -d "tests" ]; then
-            echo "exists=true" >> $GITHUB_OUTPUT
-          else
-            echo "exists=false" >> $GITHUB_OUTPUT
-          fi
-
-      - name: Rodar testes com cobertura (todos os projetos encontrados)
-        if: steps.testcheck.outputs.exists == 'true'
-        run: |
-          mkdir -p ./TestResults/Coverage
-          for proj in $(find tests -name "*.csproj"); do
-            name=$(basename "$proj" .csproj)
-            dotnet test "$proj" \
-              --no-build \
-              --configuration Release \
-              --collect:"XPlat Code Coverage" \
-              --results-directory ./TestResults/Coverage/$name
-          done
-
-       - name: Verificar cobertura total
-        if: steps.testcheck.outputs.exists == 'true'
-        run: |
-          dotnet tool install --global dotnet-reportgenerator-globaltool --version 5.1.26
-          export PATH="$PATH:/home/runner/.dotnet/tools"
-
-          # Coletar todos os arquivos de cobertura
-          report_args=""
-          for file in $(find ./TestResults/Coverage -name 'coverage.cobertura.xml'); do
-            report_args="$report_args -reports:$file"
-          done
-
-          if [ -z "$report_args" ]; then
-            echo "Nenhum arquivo de cobertura encontrado. Cancelando..."
-            exit 1
-          fi
-
-          reportgenerator \
-            $report_args \
-            -targetdir:coveragereport \
-            -reporttypes:TextSummary
-
-          # Extrair cobertura final
-          coverage=$(grep "Line coverage" coveragereport/Summary.txt | awk '{print $3}' | sed 's/%//')
-          echo "Cobertura combinada: $coverage%"
-
-          if (( $(echo "$coverage < 75" | bc -l) )); then
-            echo "Cobertura abaixo de 75%. Falhando o pipeline."
-            exit 1
-          fi

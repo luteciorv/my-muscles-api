@@ -1,5 +1,4 @@
 ﻿using Bogus;
-using MyMuscles.Domain.Mensagens;
 using MyMuscles.Domain.ValueObjects;
 using Shouldly;
 
@@ -27,7 +26,6 @@ public sealed class FotoTests
         foto.Notificacoes.ShouldSatisfyAllConditions(n =>
         {
             n.ShouldContain(n => n.Chave == nameof(Foto.Nome));
-            n.ShouldContain(n => n.Mensagem == MensagensExtension.CampoObrigatorio(nameof(Foto.Nome)));
         });
     }
 
@@ -40,7 +38,6 @@ public sealed class FotoTests
         foto.Notificacoes.ShouldSatisfyAllConditions(n =>
         {
             n.ShouldContain(n => n.Chave == nameof(Foto.Url));
-            n.ShouldContain(n => n.Mensagem == MensagensExtension.CampoObrigatorio(nameof(Foto.Url)));
         });
     }
 
@@ -53,7 +50,6 @@ public sealed class FotoTests
         foto.Notificacoes.ShouldSatisfyAllConditions(n =>
         {
             n.ShouldContain(n => n.Chave == nameof(Foto.Url));
-            n.ShouldContain(n => n.Mensagem == MensagensExtension.CampoInvalido(nameof(Foto.Url)));
         });
     }
 

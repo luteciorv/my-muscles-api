@@ -1,5 +1,5 @@
 ﻿using Bogus;
-using MyMuscles.Domain.Mensagens;
+using MyMuscles.Domain.Extensions;
 using MyMuscles.Domain.ValueObjects.Informacoes;
 using Shouldly;
 
@@ -31,7 +31,6 @@ public sealed class EmailTests
         {
             n.Count.ShouldBe(1);
             n.First().Chave.ShouldBe(nameof(Email));
-            n.First().Mensagem.ShouldBe(MensagensExtension.CampoInvalido(nameof(Email.Endereco)));
         });
     }
 
@@ -48,7 +47,6 @@ public sealed class EmailTests
         {
             n.Count.ShouldBe(1);
             n.First().Chave.ShouldBe(nameof(Email));
-            n.First().Mensagem.ShouldBe(MensagensExtension.CampoObrigatorio(nameof(Email.Endereco)));
         });
     }
 

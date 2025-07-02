@@ -1,5 +1,4 @@
 ﻿using MyMuscles.Domain.Extensions;
-using MyMuscles.Domain.Mensagens;
 using MyMuscles.Domain.Shared;
 
 namespace MyMuscles.Domain.ValueObjects;
@@ -23,23 +22,23 @@ public sealed class Senha : ValueObjectBase
     {
         if (Valor.Vazio())
         {
-            AdicionarNotificacao(nameof(Senha), MensagensExtension.CampoObrigatorio(nameof(Senha)));
+            AdicionarNotificacao(nameof(Senha), "A senha é obrigatória.");
             return;
         }
 
         if (Valor.Length < 8)
-            AdicionarNotificacao(nameof(Senha), MensagensExtension.MinimoCaracteresObrigatorio(nameof(Senha), 8));
+            AdicionarNotificacao(nameof(Senha), "A senha precisa ter ao menos 8 caracteres.");
 
         if (!Valor.Any(char.IsUpper))
-            AdicionarNotificacao(nameof(Senha), MensagensExtension.LetraMaiusculaObrigatoria(nameof(Senha)));
+            AdicionarNotificacao(nameof(Senha), "A senha precisa ter ao menos 1 caracter maiúsculo.");
 
         if (!Valor.Any(char.IsLower))
-            AdicionarNotificacao(nameof(Senha), MensagensExtension.LetraMinusculaObrigatoria(nameof(Senha)));
+            AdicionarNotificacao(nameof(Senha),"A senha precisa ter ao menos 1 caracter minúsculo.");
 
         if (!Valor.Any(char.IsDigit))
-            AdicionarNotificacao(nameof(Senha), MensagensExtension.NumeroObrigatorio(nameof(Senha)));
+            AdicionarNotificacao(nameof(Senha), "A senha precisa ter ao menos 1 número.");
 
         if (!Valor.Any(c => !char.IsLetterOrDigit(c)))
-            AdicionarNotificacao(nameof(Senha), MensagensExtension.CaracterEspecialObrigatorio(nameof(Senha)));
+            AdicionarNotificacao(nameof(Senha), "A senha precisa ter ao menos 1 caracter especial (@#$%¨&* etc).");
     }
 }

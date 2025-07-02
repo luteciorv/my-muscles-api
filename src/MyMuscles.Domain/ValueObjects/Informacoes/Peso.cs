@@ -1,4 +1,4 @@
-﻿using MyMuscles.Domain.Mensagens;
+﻿using MyMuscles.Domain.Extensions;
 using MyMuscles.Domain.Shared;
 
 namespace MyMuscles.Domain.ValueObjects.Informacoes;
@@ -21,6 +21,6 @@ public sealed class Peso : ValueObjectBase
     protected override void Validar()
     {
         if (ValorEmKg <= 0)
-            AdicionarNotificacao(nameof(Peso), MensagensExtension.ApenasValorPositivo(nameof(Peso)));
+            AdicionarNotificacao(nameof(Peso), "O campo precisa ter o valor maior do que 0.");
     }
 }

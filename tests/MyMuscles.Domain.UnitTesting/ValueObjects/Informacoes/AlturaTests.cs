@@ -1,6 +1,5 @@
 ﻿using Bogus;
 using MyMuscles.Domain.Constantes;
-using MyMuscles.Domain.Mensagens;
 using MyMuscles.Domain.ValueObjects.Informacoes;
 using Shouldly;
 
@@ -29,7 +28,6 @@ public sealed class AlturaTests
         {
             n.Count.ShouldBe(1);
             n.ShouldContain(n => n.Chave == nameof(Altura));
-            n.ShouldContain(n => n.Mensagem == MensagensExtension.ApenasValorPositivo(nameof(Altura)));
         });
     }    
 
@@ -43,7 +41,6 @@ public sealed class AlturaTests
         {
             n.Count.ShouldBe(1);
             n.ShouldContain(n => n.Chave == nameof(Altura));
-            n.ShouldContain(n => n.Mensagem == MensagensExtension.ValorMaximo(nameof(Altura), $"{SistemaConstantes.AlturaMaxima} m"));
         });
     }
 

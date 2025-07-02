@@ -1,5 +1,4 @@
 ﻿using MyMuscles.Domain.Extensions;
-using MyMuscles.Domain.Mensagens;
 using MyMuscles.Domain.Shared;
 using System.Net.Mail;
 
@@ -24,7 +23,7 @@ public sealed class Email : ValueObjectBase
     {
         if(Endereco.Vazio())
         {
-            AdicionarNotificacao(nameof(Email), MensagensExtension.CampoObrigatorio(nameof(Endereco)));
+            AdicionarNotificacao(nameof(Email), "O campo 'Endereço' é obrigatório.");
             return;
         }
 
@@ -34,7 +33,7 @@ public sealed class Email : ValueObjectBase
         }
         catch
         {
-            AdicionarNotificacao(nameof(Email), MensagensExtension.CampoInvalido(nameof(Endereco)));
+            AdicionarNotificacao(nameof(Email), "O campo 'Endereço' está inválido.");
         }
     }
 }
