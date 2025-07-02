@@ -1,6 +1,6 @@
 ﻿using MyMuscles.Domain.Constantes;
 using MyMuscles.Domain.Enums;
-using MyMuscles.Domain.Mensagens;
+using MyMuscles.Domain.Extensions;
 using MyMuscles.Domain.Shared;
 using MyMuscles.Domain.ValueObjects.Informacoes;
 

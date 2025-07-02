@@ -130,6 +130,9 @@
   <data name="CARACTER_ESPECIAL_OBRIGATORIO" xml:space="preserve">
     <value>O campo '{0}' precisa conter ao menos 1 caracter especial.</value>
   </data>
+  <data name="EXERCICIO_NAO_ENCONTRADO" xml:space="preserve">
+    <value>O exercício não foi encontrado.</value>
+  </data>
   <data name="LETRA_MAIUSCULA_OBRIGATORIA" xml:space="preserve">
     <value>O campo '{0}' precisa conter ao menos 1 letra maiúscula.</value>
   </data>

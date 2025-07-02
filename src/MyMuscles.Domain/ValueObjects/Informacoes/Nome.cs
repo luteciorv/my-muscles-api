@@ -1,5 +1,4 @@
 ﻿using MyMuscles.Domain.Extensions;
-using MyMuscles.Domain.Mensagens;
 using MyMuscles.Domain.Shared;
 
 namespace MyMuscles.Domain.ValueObjects.Informacoes;

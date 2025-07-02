@@ -1,7 +1,7 @@
 ﻿using Bogus;
 using MyMuscles.Domain.Constantes;
 using MyMuscles.Domain.Enums;
-using MyMuscles.Domain.Mensagens;
+using MyMuscles.Domain.Extensions;
 using MyMuscles.Domain.ValueObjects;
 using MyMuscles.Domain.ValueObjects.Informacoes;
 using Shouldly;

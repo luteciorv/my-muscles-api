@@ -1,4 +1,6 @@
-﻿namespace MyMuscles.Domain.Mensagens;
+﻿using MyMuscles.Domain.Shared;
+
+namespace MyMuscles.Domain.Extensions;
 
 public static class MensagensExtension
 {

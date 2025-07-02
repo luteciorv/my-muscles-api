@@ -1,4 +1,4 @@
-﻿using MyMuscles.Domain.Mensagens;
+﻿using MyMuscles.Domain.Extensions;
 using MyMuscles.Domain.ValueObjects;
 using Shouldly;
 

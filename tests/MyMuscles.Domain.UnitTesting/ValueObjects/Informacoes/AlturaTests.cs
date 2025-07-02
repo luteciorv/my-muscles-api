@@ -1,6 +1,6 @@
 ﻿using Bogus;
 using MyMuscles.Domain.Constantes;
-using MyMuscles.Domain.Mensagens;
+using MyMuscles.Domain.Extensions;
 using MyMuscles.Domain.ValueObjects.Informacoes;
 using Shouldly;
 

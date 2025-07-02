@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace MyMuscles.Domain.Mensagens {
+namespace MyMuscles.Domain.Shared {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace MyMuscles.Domain.Mensagens {
         public static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MyMuscles.Domain.Mensagens.Mensagens", typeof(Mensagens).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("MyMuscles.Domain.Shared.Mensagens", typeof(Mensagens).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -93,6 +93,15 @@ namespace MyMuscles.Domain.Mensagens {
         public static string CARACTER_ESPECIAL_OBRIGATORIO {
             get {
                 return ResourceManager.GetString("CARACTER_ESPECIAL_OBRIGATORIO", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Consulta uma cadeia de caracteres localizada semelhante a O exercício não foi encontrado..
+        /// </summary>
+        public static string EXERCICIO_NAO_ENCONTRADO {
+            get {
+                return ResourceManager.GetString("EXERCICIO_NAO_ENCONTRADO", resourceCulture);
             }
         }
         
